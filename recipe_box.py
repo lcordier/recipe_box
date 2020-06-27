@@ -13,7 +13,7 @@ import os
 import requests
 import sys
 
-from recipe_scrapers import scrape_me, WebsiteNotImplementedError
+from recipe_scrapers import scrape_me, WebsiteNotImplementedError, SCRAPERS
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -83,7 +83,19 @@ def valid_filename(directory, filename=None, ascii=False):
 if __name__ == '__main__':
 
     parser = optparse.OptionParser('%prog url')
+
+    parser.add_option('-l',
+                      dest='list',
+                      action='store_true',
+                      default=False,
+                      help='list all available sites')
+
     options, args = parser.parse_args()
+
+    if options.list:
+        for host in sorted(SCRAPERS):
+            print(host)
+        sys.exit()
 
     config_path = os.path.join(ROOT, 'recipe_box.json')
     if not os.path.exists(config_path):
@@ -98,7 +110,12 @@ if __name__ == '__main__':
         try:
             scraper = scrape_me(url)
         except WebsiteNotImplementedError:
-            print('Scraper not defined for {url}'.format(url=url))
+            print('No scraper defined for {url}'.format(url=url))
+            print('It is recommended you add it to recipe-scrapers site, that way everybody gains from the effort.')
+            print('https://github.com/hhursev/recipe-scrapers#if-you-want-a-scraper-for-a-new-site-added')
+            print('')
+            print('Once someone has added the new scraper:')
+            print('pip install --upgrade recipe-scrapers')
         else:
             recipe_box = ensure_directory_exists(config['recipe_box'])
             media = ensure_directory_exists(os.path.join(config['recipe_box'], 'media'))
@@ -113,7 +130,9 @@ if __name__ == '__main__':
             except:
                 filename = None
             else:
-                filename = os.path.basename(path)[:-3] + os.path.splitext(scraper.image())[1]
+                # Not sure about image urls without filename extensions, might need python-magic.
+                # Also, os.path.splitext(url), probably not a good idea. ;)
+                filename = os.path.splitext(os.path.basename(path))[0] + os.path.splitext(scraper.image())[1]
                 image = open(os.path.join(media, filename), 'wb')
                 image.write(response.content)
                 image.close()
