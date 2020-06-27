@@ -1,5 +1,11 @@
 from setuptools import setup
 
+"""
+    python3 setup.py sdist bdist_wheel
+    python3 -m twine upload dist/*
+
+    https://packaging.python.org/tutorials/packaging-projects/
+"""
 
 def readme():
     with open('README.md') as f:
