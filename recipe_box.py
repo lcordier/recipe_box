@@ -155,10 +155,12 @@ def main():
             recipe.write('\n')
             recipe.write('## Instructions\n')
             for instruction in scraper.instructions().split('\n'):
-                if instruction.strip()[0].isdigit():
-                    recipe.write('{instruction}\n'.format(instruction=instruction))
-                else:
-                    recipe.write('1. {instruction}\n'.format(instruction=instruction))
+                instruction = instruction.strip()
+                if instruction:
+                    if instruction[0].isdigit():
+                        recipe.write('{instruction}\n'.format(instruction=instruction))
+                    else:
+                        recipe.write('1. {instruction}\n'.format(instruction=instruction))
 
             recipe.write('\n')
             recipe.write('[{url}]({url})\n'.format(url=url))
