@@ -16,7 +16,7 @@ import sys
 from recipe_scrapers import scrape_me, WebsiteNotImplementedError, SCRAPERS
 
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
+ROOT = '~/.config/recipe_box/'
 
 
 def ensure_directory_exists(path, expand_user=True, file=False):
@@ -80,8 +80,9 @@ def valid_filename(directory, filename=None, ascii=False):
         return filename
 
 
-if __name__ == '__main__':
-
+def main():
+    """ Console script entry point.
+    """
     parser = optparse.OptionParser('%prog url')
 
     parser.add_option('-l',
@@ -97,11 +98,11 @@ if __name__ == '__main__':
             print(host)
         sys.exit()
 
-    config_path = os.path.join(ROOT, 'recipe_box.json')
+    config_path = ensure_directory_exists(os.path.join(ROOT, 'recipe_box.json'), file=True)
     if not os.path.exists(config_path):
         config = {'recipe_box': '~/recipe_box/'}
         with open(config_path, 'w') as f:
-            json.dump(config, f)
+            json.dump(config, f, indent=4)
     else:
         with open(config_path, 'r') as f:
             config = json.load(f)
@@ -161,3 +162,7 @@ if __name__ == '__main__':
 
             recipe.write('\n')
             recipe.write('[{url}]({url})\n'.format(url=url))
+
+
+if __name__ == '__main__':
+    main()
