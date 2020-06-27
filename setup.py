@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name='recipe_box',
-    version='0.1.0',
+    version='0.1.1',
     py_modules=['recipe_box'],
     description='Utility to scrape recipes and put it in a local Zettelkasten.',
     long_description=readme(),
