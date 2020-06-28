@@ -129,10 +129,10 @@ To add a new [recipe site](https://github.com/hhursev/recipe-scrapers#if-you-wan
 
 ## Acknowledgements
 
-*Recipe Box* was inspired by [Jay Goel](https://github.com/poundifdef)'s [plainoldrecipe](https://github.com/poundifdef/plainoldrecipe).
+**Recipe Box** was inspired by [Jay Goel](https://github.com/poundifdef)'s [plainoldrecipe](https://github.com/poundifdef/plainoldrecipe).
 
-*Recipe Box* wouldn't be possible without [hhursev](https://github.com/hhursev)'s [recipe-scrapers](https://github.com/hhursev/recipe-scrapers).
+**Recipe Box** wouldn't be possible without [hhursev](https://github.com/hhursev)'s [recipe-scrapers](https://github.com/hhursev/recipe-scrapers).
 
 ## License
 
-*Recipe Box* is licensed under the [MIT license](LICENSE).
+**Recipe Box** is licensed under the [MIT license](LICENSE).
