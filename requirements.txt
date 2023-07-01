@@ -1,1 +1,3 @@
 recipe-scrapers
+requests
+httpx[http2]
