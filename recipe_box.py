@@ -14,7 +14,7 @@ import sys
 
 try:
     import httpx
-    url_getter = httpx
+    url_getter = httpx.Client(http2=True)
 except ImportError:
     import requests
     url_getter = requests
